@@ -1,0 +1,85 @@
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+            
+              <!-- /.card-header -->
+              <!-- form start -->
+              <div class="tabel">
+             <center><table id="example1" class="table table-bordered table-striped">
+    <thead>
+        <tr align="center">
+            <th>No</th>
+            <th>Kode Barang</th>
+            <th>Nama Barang</th>
+            <th>Satuan</th>
+            <th>Harga</th>
+            <th>Jumlah Order</th>
+            <th>Total</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+      <?php
+                                    include 'konek.php';
+                                    $nom = 1;
+                                    $sql = mysqli_query($koneksi,"select * from transaksi_detail where kode_transaksi='$noku'");
+                                    while ($data = mysqli_fetch_array($sql)) {
+                                            ?>
+      <tr>
+        <td><?php echo $nom++; ?></td>
+                                            <td ><?php echo $data['kode_barang'];?></td>
+                                            <td ><?php echo $data['nama_baarang'];?></td>
+                                            <td ><?php echo $data['satuan'];?></td>
+                                            <td ><?php echo 'Rp. '.number_format($data['harga_barang']).',-';?></td>
+                                            <td ><?php echo $data['jumlah_barang'];?></td>
+          <td><?php echo 'Rp. '.number_format($data['total']).',-' ?></td>
+          <td>
+            <a href="tambah_trans.php?no=<?php echo $kode_otomatis;?>&kode=<?php echo $data['kode_barang'];?>&nama=<?php echo $namaku;?>&alamat=<?php echo $alamatku;?>" class="btn btn-success" title="Tambah">+</a>
+              <a  href="hapus_trans.php?no=<?php echo $kode_otomatis;?>&kode=<?php echo $data['kode_barang'];?>&nama=<?php echo $namaku;?>&alamat=<?php echo $alamatku;?>" class="btn btn-success" title="Kurang">-</a>
+              <a  onclick ="return confirm('Yakin Hapus Data ?')" href="gagal_trans.php?no=<?php echo $kode_otomatis;?>&jm=<?php echo $data['jumlah_barang'];?>&kode=<?php echo $data['kode_barang'];?>&nama=<?php echo $namaku;?>&alamat=<?php echo $alamatku;?>" class="btn btn-danger" title="Hapus">x</a>
+          </td>
+      </tr>
+      <?php
+          $subtotal = $subtotal + $data['total'];
+        }
+      ?>
+    </tbody>
+    <tr></tr>
+    <tr>
+    <td colspan="4"></td>
+      <td>Subtotal</td>
+      <td>:</td>
+      <td><?php echo 'Rp. '.number_format($subtotal).',-'?></td>
+      <td><a style="margin-right: 20px; " href="bayar.php?no=<?php echo $kode_otomatis;?>" title="Bayar" class="btn btn-success">Pembayaran
+    <a href="batal_trans.php?no=<?php echo $kode_otomatis;?>" title="Batal" class="btn btn-danger">Batal Transaksi</td>
+    </tr>
+  </table>
+  </center>
+</div>
+
+            </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+             <div class="container-fluid">
+             <div class="card-body">
+               <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            
+</div>
+</div>
+</div>
+</div>
+</section>
